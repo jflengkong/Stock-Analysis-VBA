@@ -5,7 +5,8 @@ For Each ws In Worksheets
     'Set all Dimensions and Parameters
     Dim Total_Vol As LongLong
     Dim RowCount As LongLong
-    Dim i, r As Long
+    Dim i as LongLong
+    Dim r as LongLong
     Dim LastRow As LongLong
     Dim Yearly_Change As Double
     Dim OpenPerc As Double
