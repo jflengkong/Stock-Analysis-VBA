@@ -2,7 +2,7 @@ Sub Tickers()
 
 For Each ws In Worksheets
 
-    'Set all Dimensions and Parameters
+    'Set all Dimensions and Parameters for first part of challenge 
     Dim Total_Vol As LongLong
     Dim RowCount As LongLong
     Dim i as LongLong
@@ -25,16 +25,17 @@ For Each ws In Worksheets
     'Set RowCount Variable
     RowCount = 2
     
-    'Setting starting row to 2
+    'Setting a second rowc ounter to 2
     r = 2
     
     'Create a loop for the rows
     For i = 2 To LastRow
+
+        'Define variables for OpenPerc & ClosingPerc 
         OpenPerc = ws.Cells(r, 3).Value
         ClosingPerc = ws.Cells(i, 6).Value
         
-        'Add Total volume per ticker
-        
+        'Add Total volume per ticker in the loop 
         Total_Vol = Total_Vol + ws.Cells(i, 7).Value
         
         'Check each row in column 1 and check if row after has the same value
@@ -65,6 +66,8 @@ For Each ws In Worksheets
             
             'Print Total Volume into column 12 in Row as per RowCoutn
             ws.Cells(RowCount, 12).Value = Total_Vol
+
+            'Reset Total_Vol to 0 
             Total_Vol = 0
             
             'Increase RowCount by 1
@@ -75,7 +78,8 @@ For Each ws In Worksheets
             
          End If
     Next i
-    
+
+    'Set Dimensions for "bonus" section 
     Dim MaxValue As Double
     Dim MaxTicker As String
     Dim MinValue As Double
@@ -84,7 +88,7 @@ For Each ws In Worksheets
     Dim MaxTotalTicker As String
     Dim LastLast As Long
     
-    'Set New headings for second table
+    'Set New headings for "Bonus" section
     ws.Range("O1").Value = "Ticker"
     ws.Range("P1").Value = "Value"
     ws.Range("N2").Value = "Greatest % Increase"
@@ -92,34 +96,40 @@ For Each ws In Worksheets
     ws.Range("N4").Value = "Greatest Total Volume"
     ws.Range("N2:N4").Font.Bold = True
     
-    'Set new counter for LastRow
+    'Set new counter for LastRow for new second table 
     LastLast = ws.Cells(Rows.Count, 11).End(xlUp).Row
     
-    'Find the maximum and minimum values and their corresponding tickers
+    'Find the maximum and minimum values
     MaxValue = Application.WorksheetFunction.Max(ws.Range("K2:K" & LastLast))
     MinValue = Application.WorksheetFunction.Min(ws.Range("K2:K" & LastLast))
     MaxTotal = Application.WorksheetFunction.Max(ws.Range("L2:L" & LastLast))
-    
+
+    'Create a loop to find the Ticker names 
     For i = 2 To LastLast
         If ws.Cells(i, 11).Value = MaxValue Then
                 MaxTicker = ws.Cells(i, 9).Value
+
         ElseIf ws.Cells(i, 11).Value = MinValue Then
                 MinTicker = ws.Cells(i, 9).Value
+
         ElseIf ws.Cells(i, 12).Value = MaxTotal Then
                 MaxTotalTicker = ws.Cells(i, 9).Value
+
         End If
+
     Next i
-        ' Write the results in cells O2 and P2 for Greates percentage increase
+
+        ' Write for Greates percentage increase in percentage format
         ws.Range("O2").Value = MaxTicker
         ws.Range("P2").Value = MaxValue
         ws.Range("P2").NumberFormat = "0.00%"
         
-        ' Write the results in cells O3 and P3 for Greatest percentage decrease
+        ' Write the results for greatest percentage decrease in percentave format
         ws.Range("O3").Value = MinTicker
         ws.Range("P3").Value = MinValue
         ws.Range("P3").NumberFormat = "0.00%"
         
-        ' Write the results in cells O4 and P4 for greatest total volume
+        ' Write the results for greatest total volume in scientific format
         ws.Range("O4").Value = MaxTotalTicker
         ws.Range("P4").Value = MaxTotal
         ws.Range("P4").NumberFormat = "##0.00E+0"
