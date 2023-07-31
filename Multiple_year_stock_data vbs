@@ -5,8 +5,7 @@ For Each ws In Worksheets
     'Set all Dimensions and Parameters for first part of challenge 
     Dim Total_Vol As LongLong
     Dim RowCount As LongLong
-    Dim i as LongLong
-    Dim r as LongLong
+    Dim i,r as Long
     Dim LastRow As LongLong
     Dim Yearly_Change As Double
     Dim OpenPerc As Double
