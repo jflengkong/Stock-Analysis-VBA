@@ -1,4 +1,5 @@
-# Week 2 - VBA Lessons 
+# Stock Analysis Challenge 
+### Week 2- UWA Data Analytics 
 
 In this VBA challenge, we were provided with a large stock dataset that required analysis and formatting through VBA. 
 
